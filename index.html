@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>muselunden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Muselunden?</h1>
+    <p>du mener vel</p>
+    <h1 id="result">...</h1>
+  </body>
+  <script>
+    fetch("/api/api")
+      .then(res => res.json())
+      .then(res => {
+        console.log(document.querySelector("#result"));
+
+        document.getElementById("result").innerHTML = res.muselunden;
+      });
+  </script>
+</html>
