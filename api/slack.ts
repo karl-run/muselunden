@@ -19,17 +19,21 @@ export default async (request: NowRequest, response: NowResponse) => {
   if (request.body.event.channel !== "CNA4FLQ7L") {
     console.warn("Not from sendplate channel, ignoring");
     response.status(200);
-    response.send(JSON.stringify({ message: "No :)" }));
+    response.send(JSON.stringify({ message: "OK" }));
     return;
   }
 
   if (!!request.body.event.bot_profile) {
     console.info("Not a human, not responding");
+    response.status(200);
+    response.send(JSON.stringify({ message: "OK" }));
     return;
   }
 
   if (!request.body.event.text.toLowerCase().includes("muselunden")) {
     console.info("This doesn't look like anything to me");
+    response.status(200);
+    response.send(JSON.stringify({ message: "OK" }));
     return;
   }
 
