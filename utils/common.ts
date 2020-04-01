@@ -6,7 +6,14 @@ const muse = [
   "Dotte",
   "Dåse",
   "Vagina",
-  "Kuse"
+  "Kuse",
+  "Biffgardin",
+  "Fette",
+  "Vulva",
+  "Pussy",
+  "Cunte",
+  "Queefeapparat",
+  "Bollefisse",
 ];
 
 const lunden = [
@@ -17,7 +24,14 @@ const lunden = [
   "Bråten",
   "Dynga",
   "Haugen",
-  "Klippen"
+  "Klippen",
+  "Dalen",
+  "Mo",
+  "Enga",
+  "Stad",
+  "Heim",
+  "Tunet",
+  "Gard",
 ];
 
 const pickRandom = (list: string[]) => list[Math.floor(Math.random() * list.length)];
