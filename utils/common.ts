@@ -1,4 +1,4 @@
-const muse = [
+export const muse = [
   "Muse",
   "Fitte",
   "Glufse",
@@ -16,7 +16,7 @@ const muse = [
   "Bollefisse",
 ];
 
-const lunden = [
+export const lunden = [
   "Lunden",
   "Skrenten",
   "Berget",
@@ -34,7 +34,7 @@ const lunden = [
   "Gard",
 ];
 
-const pickRandom = (list: string[]) => list[Math.floor(Math.random() * list.length)];
+export const pickRandom = (list: string[]) => list[Math.floor(Math.random() * list.length)];
 
 export const createName = (): string =>
   `${pickRandom(muse)}${pickRandom(lunden).toLowerCase()}`;

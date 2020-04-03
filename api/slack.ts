@@ -1,8 +1,34 @@
 import { NowRequest, NowResponse } from "@now/node";
 import fetch from "node-fetch";
-import { createName } from "../utils/common";
+import { createName, muse, pickRandom } from "../utils/common";
 
-export default async (request: NowRequest, response: NowResponse) => {
+interface Keyword {
+  keyword: string;
+  createMessage: () => string;
+}
+
+const keywords: Keyword[] = [
+  {
+    keyword: "musa",
+    createMessage: () => {
+      const word = pickRandom(muse)
+        .replace(/\e$/, "a")
+        .replace(/t$/, "tet")
+        .replace(/n$/, "na")
+        .replace(/\y$/, "ya");
+      return `Musa? Du mener vel ${word}`;
+    }
+  },
+  {
+    keyword: "muselunden",
+    createMessage: () => `Muselunden? Du mener vel ${createName()}`
+  }
+];
+
+export default async (
+  request: NowRequest,
+  response: NowResponse
+): Promise<void> => {
   if (!request.body) {
     response.status(400).send(JSON.stringify({ message: "Invalid request" }));
     return;
@@ -30,14 +56,16 @@ export default async (request: NowRequest, response: NowResponse) => {
     return;
   }
 
-  if (!request.body.event.text.toLowerCase().includes("muselunden")) {
+  const messageText = request.body.event.text.toLowerCase();
+  const keyword = keywords.find(it => messageText.includes(it.keyword));
+  if (!keyword) {
     console.info("This doesn't look like anything to me");
     response.status(200);
     response.send(JSON.stringify({ message: "OK" }));
     return;
   }
 
-  const message = `Muselunden? Du mener vel ${createName()}`;
+  const message = keyword.createMessage();
   await fetch(
     `https://slack.com/api/chat.postMessage?token=${process.env.SLACK_TOKEN}&channel=${request.body.event.channel}&text=${message}&pretty=1`,
     {
