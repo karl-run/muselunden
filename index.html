@@ -13,20 +13,45 @@
         justify-content: center;
         align-items: center;
       }
+
+      #mer {
+        background: none;
+        border: none;
+        color: #999;
+        width: 120px;
+        height: 42px;
+        font-size: 1.2rem;
+        margin-top: 32px;
+      }
+
+      #github {
+        position: fixed;
+        bottom: 8px;
+        right: 8px;
+        text-decoration: none;
+        color: #999;
+      }
     </style>
   </head>
   <body>
     <h1>Muselunden?</h1>
     <p>du mener vel</p>
     <h1 id="result">...</h1>
+    <button id="mer" onclick="loadWord()">Mer <span>&#10227</span></button>
   </body>
+  <a id="github" href="https://github.com/karl-run/muselunden" target="_blank" rel="noopener">github</a>
   <script>
-    fetch("/api/api")
-      .then(res => res.json())
-      .then(res => {
-        console.log(document.querySelector("#result"));
+    const loadWord = () => {
+      document.getElementById("result").innerHTML = "..."
+      fetch("/api/api")
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(document.querySelector("#result"));
 
-        document.getElementById("result").innerHTML = res.muselunden;
-      });
+          document.getElementById("result").innerHTML = res.muselunden;
+        });
+    };
+
+    loadWord();
   </script>
 </html>
