@@ -42,13 +42,6 @@ export default async (
     return;
   }
 
-  if (request.body.event.channel !== "CNA4FLQ7L") {
-    console.warn("Not from sendplate channel, ignoring");
-    response.status(200);
-    response.send(JSON.stringify({ message: "OK" }));
-    return;
-  }
-
   if (!!request.body.event.bot_profile) {
     console.info("Not a human, not responding");
     response.status(200);
