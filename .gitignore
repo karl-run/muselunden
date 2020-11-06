@@ -1,6 +1,9 @@
 .now
 node_modules
+.yarn/cache
+.idea
 
 # Environment Variables
 .env
 .env.build
+.vercel
