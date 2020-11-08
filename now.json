@@ -1,10 +1,6 @@
 {
-  "routes": [
-    { "src": "/api/api", "methods": ["GET"], "dest": "/api/api" },
-    { "src": "/api/slack", "methods": ["POST"], "dest": "/api/slack.ts" },
-    { "src": "/api/vote/(.*)", "methods": ["POST"], "dest": "/api/vote.ts" },
-    { "src": "/stats", "dest": "/stats.html" }
-  ],
+  "cleanUrls": true,
+  "rewrites": [{ "source": "/api/vote/:action", "destination": "/api/vote" }],
   "env": {
     "SLACK_TOKEN": "@muselunden-slack-token",
     "MONGODB_USER": "@muselunden-mongodb-user",

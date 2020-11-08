@@ -2,6 +2,8 @@
 node_modules
 .yarn/cache
 .idea
+.vscode
+/public/build/
 
 # Environment Variables
 .env

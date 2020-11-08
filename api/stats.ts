@@ -1,6 +1,6 @@
-import { NowRequest, NowResponse } from "@now/node";
+import type { NowRequest, NowResponse } from '@vercel/node';
 
-import { WordVotes } from "../utils/mongo";
+import { WordVotes } from '../utils/api/mongo';
 
 export default async (request: NowRequest, response: NowResponse) => {
   const words = await WordVotes.find({});

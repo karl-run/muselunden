@@ -1,19 +1,19 @@
-import { NowRequest, NowResponse } from "@now/node";
+import type { NowRequest, NowResponse } from '@vercel/node';
 
-import { WordVotes } from "../utils/mongo";
+import { WordVotes } from '../utils/api/mongo';
 
 const handleView = async (word: string) => {
   const result = await WordVotes.findOne({ word });
 
   if (!result) {
-    console.info("New unseen word");
+    console.info('New unseen word');
     await new WordVotes({
       word,
       viewed: 1,
       up: 0,
       down: 0,
     }).save();
-    console.info("Saved new word " + word);
+    console.info('Saved new word ' + word);
     return;
   }
 
@@ -23,7 +23,7 @@ const handleView = async (word: string) => {
 };
 
 const handleUpvote = async (word: string) => {
-  console.info("New upvote for " + word);
+  console.info('New upvote for ' + word);
   const result = await WordVotes.findOne({ word });
 
   if (!result) {
@@ -33,11 +33,11 @@ const handleUpvote = async (word: string) => {
   result.up = result.up + 1;
 
   await result.save();
-  console.info("Saved upvote for " + word);
+  console.info('Saved upvote for ' + word);
 };
 
 const handleDownvote = async (word: string) => {
-  console.info("New downvote for " + word);
+  console.info('New downvote for ' + word);
   const result = await WordVotes.findOne({ word });
 
   if (!result) {
@@ -47,40 +47,38 @@ const handleDownvote = async (word: string) => {
   result.down = result.down + 1;
 
   await result.save();
-  console.info("New downvote for " + word);
+  console.info('New downvote for ' + word);
 };
 
 export default async (request: NowRequest, response: NowResponse) => {
   if (!request.body) {
-    response.status(400).send(JSON.stringify({ message: "Invalid request" }));
+    response.status(400).send(JSON.stringify({ message: 'Invalid request' }));
     return;
   }
 
   if (!request.body.word) {
-    response
-      .status(400)
-      .send(JSON.stringify({ message: "Invalid request body" }));
+    response.status(400).send(JSON.stringify({ message: 'Invalid request body' }));
     return;
   }
 
-  switch (request.url.split("/").slice(-1)[0]) {
-    case "up": {
+  switch (request.query.action) {
+    case 'up': {
       await handleUpvote(request.body.word);
       break;
     }
-    case "down": {
+    case 'down': {
       await handleDownvote(request.body.word);
       break;
     }
-    case "view": {
+    case 'view': {
       await handleView(request.body.word);
       break;
     }
     default: {
-      response.status(400).send(JSON.stringify({ message: "Invalid path" }));
+      response.status(400).send(JSON.stringify({ message: 'Invalid path' }));
       return;
     }
   }
 
-  response.status(200).send(JSON.stringify({ message: "OK" }));
+  response.status(200).send(JSON.stringify({ message: 'OK' }));
 };
