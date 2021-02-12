@@ -21,7 +21,7 @@ const keywords: Keyword[] = [
   },
   {
     keyword: "muselunden",
-    createMessage: () => `Muselunden? Du mener vel ${createName()}`
+    createMessage: () => `Muselunden? Du mener vel ${createName()} :lol:`
   }
 ];
 
