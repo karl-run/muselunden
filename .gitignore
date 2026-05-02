@@ -1,18 +1,2 @@
-.now
-node_modules
-.yarn/cache
 .idea
-
-# Environment Variables
-.env
-.env.build
-.vercel
-
-# yarn
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+.vscode

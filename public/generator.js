@@ -34,7 +34,7 @@ export const lunden = [
   "Gard",
 ];
 
-export const pickRandom = (list: string[]) => list[Math.floor(Math.random() * list.length)];
+export const pickRandom = (list) => list[Math.floor(Math.random() * list.length)];
 
-export const createName = (): string =>
+export const createName = () =>
   `${pickRandom(muse)}${pickRandom(lunden).toLowerCase()}`;

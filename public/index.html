@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>muselunden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html { font-family: sans-serif; }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 2rem;
+      }
+
+      .actions {
+        position: relative;
+        margin-top: 32px;
+        height: 48px;
+        padding: 16px;
+      }
+
+      .actions button {
+        background: none;
+        border: 1px solid #999;
+        color: #505050;
+        height: 42px;
+        font-size: 0.95rem;
+        margin: 2px 4px;
+        padding: 2px 8px;
+        border-radius: 8px;
+      }
+
+      #github {
+        position: fixed;
+        bottom: 8px;
+        right: 8px;
+        text-decoration: underline;
+        color: #505050;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Muselunden?</h1>
+    <p>du mener vel</p>
+    <h1 id="synonym">...</h1>
+    <div class="actions">
+      <button id="synonym-button">Gi meg en til a</button>
+    </div>
+  </body>
+  <a
+    id="github"
+    href="https://github.com/karl-run/muselunden"
+    target="_blank"
+    rel="noopener"
+    >github</a
+  >
+  <script type="module">
+    import { createName } from "./generator.js";
+
+    const synonymButton = document.getElementById("synonym-button");
+
+    function nyttSynonym() {
+      document.getElementById("synonym").innerText = createName();
+    }
+
+    synonymButton.addEventListener("click", nyttSynonym);
+
+    // Velg et ord on load
+    nyttSynonym();
+  </script>
+</html>
