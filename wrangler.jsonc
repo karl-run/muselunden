@@ -1,0 +1,15 @@
+{
+  "name": "muselunden",
+  "compatibility_date": "2026-05-03",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "muselunden.karl.run",
+      "custom_domain": true
+    }
+  ]
+}
